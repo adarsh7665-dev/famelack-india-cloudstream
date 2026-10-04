@@ -1,0 +1,44 @@
+name: Build CloudStream Extension
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.10"
+      - name: Build extension
+        run: gradle make makePluginsJson
+      - name: Publish
+        run: |
+          set -e
+          mkdir -p /tmp/publish
+          cp FamelackIndia/build/*.cs3 /tmp/publish/
+          cp build/plugins.json /tmp/publish/plugins.json
+          git fetch origin builds:builds || true
+          if git show-ref --verify --quiet refs/heads/builds; then
+            git worktree add /tmp/builds builds
+          else
+            git worktree add --orphan -b builds /tmp/builds
+          fi
+          rm -rf /tmp/builds/*
+          cp /tmp/publish/* /tmp/builds/
+          cd /tmp/builds
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Build Famelack India TV" || true
+          git push origin builds --force
