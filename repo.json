@@ -1,0 +1,8 @@
+{
+  "name": "Famelack India TV",
+  "description": "Indian live TV channels powered by the Famelack public dataset.",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/adarsh7665-dev/famelack-india-cloudstream/builds/plugins.json"
+  ]
+}

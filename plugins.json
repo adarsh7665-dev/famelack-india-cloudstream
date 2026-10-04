@@ -1,0 +1,24 @@
+[
+    {
+        "iconUrl": "https://www.google.com/s2/favicons?domain=famelack.com&sz=%size%",
+        "jarFileSize": 56423,
+        "fileHash": "sha256-4a491c20fba0d663742a2cbdb81d493ce92e751bee96cc7fc604c1b77c3821e4",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/adarsh7665-dev/famelack-india-cloudstream",
+        "fileSize": 13861,
+        "status": 1,
+        "authors": [
+            "adarsh7665-dev"
+        ],
+        "tvTypes": [
+            "Live"
+        ],
+        "version": -1,
+        "internalName": "FamelackIndia",
+        "jarUrl": "https://raw.githubusercontent.com/adarsh7665-dev/famelack-india-cloudstream/builds/FamelackIndia.jar",
+        "description": "Indian live TV channels from the Famelack public dataset.",
+        "url": "https://raw.githubusercontent.com/adarsh7665-dev/famelack-india-cloudstream/builds/FamelackIndia.cs3",
+        "name": "FamelackIndia",
+        "jarHash": "sha256-30aff634dc14d32c149f0704be7e6bb73de53380342ce8d097903c627947249b"
+    }
+]
