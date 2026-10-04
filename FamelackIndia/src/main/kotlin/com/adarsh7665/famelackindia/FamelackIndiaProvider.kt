@@ -15,9 +15,7 @@ import com.lagradost.cloudstream3.newLiveStreamLoadResponse
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
-import com.lagradost.cloudstream3.utils.ExtractorLinkType
 import com.lagradost.cloudstream3.utils.M3u8Helper
-import com.lagradost.cloudstream3.utils.newExtractorLink
 
 class FamelackIndiaProvider : MainAPI() {
     override var name = "Famelack India TV"
@@ -91,7 +89,7 @@ class FamelackIndiaProvider : MainAPI() {
             try {
                 M3u8Helper.generateM3u8(channel.name, stream, "").forEach(callback)
             } catch (_: Exception) {
-                callback(newExtractorLink(channel.name, channel.name, stream, ExtractorLinkType.M3U8))
+                // Ignore streams that cannot be parsed as M3U8.
             }
         }
         return streams.isNotEmpty()
