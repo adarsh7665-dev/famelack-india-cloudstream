@@ -15,7 +15,8 @@ import com.lagradost.cloudstream3.newLiveStreamLoadResponse
 import com.lagradost.cloudstream3.utils.AppUtils.parseJson
 import com.lagradost.cloudstream3.utils.AppUtils.toJson
 import com.lagradost.cloudstream3.utils.ExtractorLink
-import com.lagradost.cloudstream3.utils.M3u8Helper
+import com.lagradost.cloudstream3.utils.ExtractorLinkType
+import com.lagradost.cloudstream3.utils.newExtractorLink
 
 class FamelackIndiaProvider : MainAPI() {
     override var name = "Famelack India TV"
@@ -85,13 +86,22 @@ class FamelackIndiaProvider : MainAPI() {
     ): Boolean {
         val channel = parseJson<FamelackChannel>(data)
         val streams = channel.sources?.streams.orEmpty()
+        var found = false
         for (stream in streams) {
             try {
-                M3u8Helper.generateM3u8(channel.name, stream, "").forEach(callback)
+                callback(
+                    newExtractorLink(
+                        source = channel.name,
+                        name = channel.name,
+                        url = stream,
+                        type = ExtractorLinkType.M3U8
+                    )
+                )
+                found = true
             } catch (_: Exception) {
-                // Ignore streams that cannot be parsed as M3U8.
+                // Try the next source if this one is malformed.
             }
         }
-        return streams.isNotEmpty()
+        return found
     }
 }
