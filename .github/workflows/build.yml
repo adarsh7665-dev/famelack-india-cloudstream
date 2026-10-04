@@ -50,7 +50,7 @@ jobs:
             git worktree add /tmp/builds origin/builds
             cd /tmp/builds
             git checkout -B builds
-            rm -rf -- ./* ./.??* 2>/dev/null || true
+            git rm -rf . || true
           else
             git worktree add --orphan -b builds /tmp/builds
             cd /tmp/builds
