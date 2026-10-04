@@ -72,7 +72,7 @@ class FamelackIndiaProvider : MainAPI() {
     override suspend fun load(url: String): LoadResponse {
         val channel = parseJson<FamelackChannel>(url)
         val stream = channel.sources?.streams?.firstOrNull().orEmpty()
-        return newLiveStreamLoadResponse(channel.name, url, stream) {
+        return newLiveStreamLoadResponse(channel.name, url, url) {
             posterUrl = channel.logo
             plot = "Live TV • India"
         }
